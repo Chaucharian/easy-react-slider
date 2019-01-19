@@ -17,6 +17,7 @@ const Page = () => (
     <Section title="Section 2" />
     <Section title="Section 3" />
     <Section title="Section 4" />
+    <Section title="Section EL JUAM RE GATP!" />
   </SlideWrapper>
 );
 
