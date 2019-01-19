@@ -1,0 +1,52 @@
+{
+  "name": "belu_web",
+  "version": "0.0.1",
+  "description": "The profesional portfolio of my friend la belu",
+  "main": "index.js",
+  "scripts": {
+    "start": "eslint ./src/**.jsx && webpack-dev-server --open --watch --mode development",
+    "build": "eslint ./src/**.jsx && webpack --mode production",
+    "test": "yarn test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chaucharian/belu_web.git"
+  },
+  "author": "AS",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Chaucharian/belu_web/issues"
+  },
+  "homepage": "https://github.com/Chaucharian/belu_web#readme",
+  "dependencies": {
+    "less": "^3.8.1",
+    "prop-types": "^15.6.2",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "babel-preset-latest": "^6.24.1",
+    "css-loader": "^2.1.0",
+    "eslint": "^5.12.0",
+    "eslint-config-google": "^0.11.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-config-standard-jsx": "^6.0.2",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-promise": "^4.0.1",
+    "eslint-plugin-react": "^7.12.3",
+    "eslint-plugin-standard": "^4.0.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "less-loader": "^4.1.0",
+    "sass": "^1.16.0",
+    "style-loader": "^0.23.1",
+    "webpack": "^4.28.4",
+    "webpack-cli": "^3.2.1",
+    "webpack-dev-server": "^3.1.14"
+  }
+}
