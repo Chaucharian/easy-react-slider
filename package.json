@@ -1,7 +1,7 @@
 {
-  "name": "belu_web",
+  "name": "easy-react-slider",
   "version": "0.0.1",
-  "description": "The profesional portfolio of my friend la belu",
+  "description": "Library to make one page scrollable effect easily",
   "main": "index.js",
   "scripts": {
     "start": "eslint ./src/**.jsx && webpack-dev-server --open --watch --mode development",
@@ -10,10 +10,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Chaucharian/belu_web.git"
+    "url": "git+https://github.com/Chaucharian/easy-react-slider.git"
   },
   "author": "AS",
-  "license": "MIT",
+  "license": "GNU",
   "bugs": {
     "url": "https://github.com/Chaucharian/belu_web/issues"
   },

@@ -1,1 +1,1 @@
-# easy-react-slider
+# Library to make one page scrollable effect easily
