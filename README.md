@@ -1,1 +1,1 @@
-# Library to make one page scrollable effect easily
+# Library to make one page scrollable effect easily using React

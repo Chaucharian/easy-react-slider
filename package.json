@@ -1,7 +1,7 @@
 {
   "name": "easy-react-slider",
   "version": "0.0.1",
-  "description": "Library to make one page scrollable effect easily",
+  "description": "Library to make one page scrollable effect easily using React",
   "main": "index.js",
   "scripts": {
     "start": "eslint ./src/**.jsx && webpack-dev-server --open --watch --mode development",
