@@ -29,7 +29,7 @@ class SlideWrapper extends Component {
     componentDidMount() {
       document.addEventListener('keydown', event => this.keyDownHandler(event), false);
       document.addEventListener('keyup', event => this.keyUpHandler(event), false);
-      document.getElementById('wrapper').addEventListener("transitionend", () => console.log("end"), true);
+      // document.getElementById('wrapper').addEventListener("transitionend", () => , true);
       document.addEventListener('scroll', () => this.scrollHandler(), false);
       document.addEventListener('mousemove', event => this.mouseMoveHandler(event), false);
       document.addEventListener('mousedown', () => this.touchDown = true, false);
@@ -72,7 +72,6 @@ class SlideWrapper extends Component {
     }
   
     moveSection() {
-      console.log(this.movement);
       if(this.movement === 'up') { // up
         if(this.currentSection === 0) return;
         this.currentSection -= 1;
@@ -89,13 +88,17 @@ class SlideWrapper extends Component {
     }
   
     moveToChildrenSection() {
-      if(this.movement === 'left' && this.validateChildren()) { // left
-        if(this.currentChildSection === 0) return;
+      if(this.movement === 'left' && this.hasChildren(this.currentSection)) { // left
+        if(this.currentChildSection === 0) {
+          return;
+        }
         this.currentChildSection -= 1;
         this.position.x += 100;
         this.moveWrapper(this.position.x, this.position.y);
-      } else if(this.movement === 'rigth' && this.validateChildren()) { // rigth
-        if(this.currentChildSection >= this.props.children.length) return;
+      } else if(this.movement === 'rigth' && this.hasChildren(this.currentSection)) { // rigth
+        if(this.currentChildSection >= this.getChildrenAmount(this.currentSection) - 1){
+          return;
+        } 
         this.currentChildSection += 1;
         this.position.x -= 100;
         this.moveWrapper(this.position.x, this.position.y);
@@ -106,8 +109,14 @@ class SlideWrapper extends Component {
       document.getElementById('wrapper').style.transform = `translate(${x}%,${y}%)`;
     }
   
-    validateChildren() {
-      return this.props.children[this.currentSection].props.children !== undefined;
+    hasChildren(index) {
+      return this.props.children[index].props.children !== undefined;
+    }
+
+    getChildrenAmount(index) {
+      if (this.props.children[index].props.children !== undefined) {
+        return this.props.children[index].props.children.length;
+      }
     }
   
     scrollHandler() {

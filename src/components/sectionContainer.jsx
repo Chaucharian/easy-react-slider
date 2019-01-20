@@ -8,15 +8,16 @@ let sectionContainerId = 0;
 class SectionContainer extends Component {
   constructor() {
     super();
+
     sectionContainerId += 1;
     this.state = { id: sectionContainerId };
   }
 
   componentDidMount() {
     if (this.props.children !== undefined) {
-      document.getElementById(`section-container-${this.state.id}`).style.width = `${this.props.children.length * 100}%`;
+      this.childrenCount = this.props.children.length;
+      document.getElementById(`section-container-${this.state.id}`).style.width = `${ this.childrenCount * 100 }%`;
     }
-    console.log(this.props);
 
   }
 
@@ -25,7 +26,7 @@ class SectionContainer extends Component {
     let childrenCount = 0;
     this.props.children.map( child => {
       childrenCount += 1;
-      children.push(<Section key={childrenCount} title={child.props.title} />);
+      children.push(<Section key={childrenCount} title={child.props.title}> { child.children }</Section>);
     })
 
     return ( <div className={Style.sectionContainer} id={`section-container-${sectionContainerId}`} > { children } </div> );
