@@ -8,16 +8,16 @@ let sectionContainerId = 0;
 class SectionContainer extends Component {
   constructor() {
     super();
+
     sectionContainerId += 1;
     this.state = { id: sectionContainerId };
   }
 
   componentDidMount() {
     if (this.props.children !== undefined) {
-      document.getElementById(`section-container-${this.state.id}`).style.width = `${this.props.children.length * 100}%`;
+      this.childrenCount = this.props.children.length;
+      document.getElementById(`section-container-${this.state.id}`).style.width = `${ this.childrenCount * 100 }%`;
     }
-    console.log(this.props);
-
   }
 
   render() {

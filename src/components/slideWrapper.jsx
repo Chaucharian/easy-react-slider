@@ -7,6 +7,9 @@ class SlideWrapper extends Component {
     constructor() {
       super();
   
+      this.lastTime = 0;
+      this.currentTime = 0;
+      this.touchDown = false;
       this.initialScrollValue = 0;
       this.currentScrollValue = 0;
       this.movement = '';
@@ -20,16 +23,41 @@ class SlideWrapper extends Component {
         this.transitionRunning = true;
         this.keyHandler();
       }
-      this.keyUpHandler = event => this.currentKey[event.keyCode] = false;   
+      this.keyUpHandler = event => this.currentKey[event.keyCode] = false;
     }
    
     componentDidMount() {
       document.addEventListener('keydown', event => this.keyDownHandler(event), false);
       document.addEventListener('keyup', event => this.keyUpHandler(event), false);
-      document.getElementById('wrapper').addEventListener("transitionend", () => this.transitionRunning = false, true);
+      // document.getElementById('wrapper').addEventListener("transitionend", () => , true);
       document.addEventListener('scroll', () => this.scrollHandler(), false);
+      document.addEventListener('mousemove', event => this.mouseMoveHandler(event), false);
+      document.addEventListener('mousedown', () => this.touchDown = true, false);
+      document.addEventListener('mouseup', () => this.touchDown = false, false);
+      document.addEventListener('touchstart', () => this.touchStartHandler(), false);
+      document.addEventListener('touchmove', () => this.touchMoveHandler(event), false);
+      document.addEventListener('touchcancel', () => this.touchCancelHandler(), false);
+      document.addEventListener('touchend', () => this.touchEndHandler(), false);
     }
-  
+
+    mouseMoveHandler(event) {
+     this.identifyMovement(event);
+    }
+
+    identifyMovement(event) {
+      const { movementX, movementY } = event;
+      this.currentTime = event.timeStamp;
+      
+      if(this.touchDown && this.currentTime > this.lastTime) {
+        this.lastTime = this.currentTime + 500; // set extra time to make a delay
+        if(movementX <= -5) this.movement = 'rigth';
+        if(movementX >= 5) this.movement = 'left';
+        if(movementY <= -5) this.movement = 'down';
+        if(movementY >=  5) this.movement = 'up';
+        this.moveSection();
+      }
+    }
+
     keyHandler() {
         if(this.currentKey[38]) { // up
           this.movement = 'up';
@@ -60,13 +88,17 @@ class SlideWrapper extends Component {
     }
   
     moveToChildrenSection() {
-      if(this.movement === 'left' && this.validateChildren()) { // left
-        if(this.currentChildSection === 0) return;
+      if(this.movement === 'left' && this.hasChildren(this.currentSection)) { // left
+        if(this.currentChildSection === 0) {
+          return;
+        }
         this.currentChildSection -= 1;
         this.position.x += 100;
         this.moveWrapper(this.position.x, this.position.y);
-      } else if(this.movement === 'rigth' && this.validateChildren()) { // rigth
-        if(this.currentChildSection >= this.props.children.length) return;
+      } else if(this.movement === 'rigth' && this.hasChildren(this.currentSection)) { // rigth
+        if(this.currentChildSection >= this.getChildrenAmount(this.currentSection) - 1){
+          return;
+        } 
         this.currentChildSection += 1;
         this.position.x -= 100;
         this.moveWrapper(this.position.x, this.position.y);
@@ -77,8 +109,14 @@ class SlideWrapper extends Component {
       document.getElementById('wrapper').style.transform = `translate(${x}%,${y}%)`;
     }
   
-    validateChildren() {
-      return this.props.children[this.currentSection].props.children !== undefined;
+    hasChildren(index) {
+      return this.props.children[index].props.children !== undefined;
+    }
+
+    getChildrenAmount(index) {
+      if (this.props.children[index].props.children !== undefined) {
+        return this.props.children[index].props.children.length;
+      }
     }
   
     scrollHandler() {
