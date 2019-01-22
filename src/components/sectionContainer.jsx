@@ -21,14 +21,8 @@ class SectionContainer extends Component {
   }
 
   render() {
-    let children = [];
-    let childrenCount = 0;
-    this.props.children.map( child => {
-      childrenCount += 1;
-      children.push(<Section key={childrenCount} title={child.props.title}> { child.children }</Section>);
-    })
-
-    return ( <div className={Style.sectionContainer} id={`section-container-${sectionContainerId}`} > { children } </div> );
+    const { children } = this.props;
+    return ( <div className={Style.sectionContainer} id={`section-container-${sectionContainerId}`} >{ children }</div> );
   }
 }
 

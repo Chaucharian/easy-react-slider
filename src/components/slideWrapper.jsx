@@ -73,12 +73,12 @@ class SlideWrapper extends Component {
   
     moveSection() {
       if(this.movement === 'up') { // up
-        if(this.currentSection === 0) return;
+        if(this.currentSection === 0 || this.currentChildSection !== 0) return;
         this.currentSection -= 1;
         this.position.y += 100;
         this.moveWrapper(this.position.x, this.position.y);
       } else if(this.movement === 'down') { // down
-        if(this.currentSection === this.props.children.length - 1) return;
+        if(this.currentSection === this.props.children.length - 1 || this.props.children.length === undefined || this.currentChildSection !== 0) return;
         this.currentSection += 1; 
         this.position.y -= 100;
         this.moveWrapper(this.position.x, this.position.y);
@@ -110,36 +110,39 @@ class SlideWrapper extends Component {
     }
   
     hasChildren(index) {
-      return this.props.children[index].props.children !== undefined;
+      let hasChildren = false;
+      if(this.props.children !== undefined) {
+        if(this.props.children.length !== undefined) {
+          hasChildren = this.props.children[index].props.children !== undefined;
+        } else {
+          hasChildren = this.props.children.props.children !== undefined;
+        }
+      }
+      return hasChildren;
     }
 
     getChildrenAmount(index) {
-      if (this.props.children[index].props.children !== undefined) {
-        return this.props.children[index].props.children.length;
+      let childrenAmount = 0;
+      if(this.props.children !== undefined) {
+        if(this.props.children.length !== undefined) {
+          if(this.props.children[index].props.children.length !== undefined) {
+            childrenAmount = this.props.children[index].props.children.length;
+          } else {
+            childrenAmount = 1;
+          }
+        }
+      } else{
+        childrenAmount = 0;
       }
+      return childrenAmount;
     }
   
-    scrollHandler() {
-      // this.currentScrollValue = document.getElementsByTagName('body')[0].scrollTop;
-      // console.log(this.currentScrollValue);
-      // if(this.currentScrollValue >= this.initialScrollValue) {
-      //   this.initialScrollValue = this.currentScrollValue + 50;
-      //   this.currentKey[40] = true;
-      //   this.moveSection();
-      // } else {
-      //   this.initialScrollValue = this.currentScrollValue - 50;
-      //   this.currentKey[38] = true;
-      //   this.moveSection();
-      // }
-    }
+    scrollHandler() { }
   
     render() {
-      return ( <div className={Style.wrapper} id="wrapper" >{ this.props.children } </div> );
+      const { children } = this.props;
+      return ( <div className={Style.wrapper} id="wrapper" >{ children } </div> );
     }
-  }
-  
-  SlideWrapper.propTypes = {
-    children: PropTypes.array
   }
   
   export default SlideWrapper;
