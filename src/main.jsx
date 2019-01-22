@@ -5,7 +5,7 @@ import SectionContainer from './components/sectionContainer.jsx';
 import Section from './components/section.jsx';
 import Background from './model/imageSections';
 
-const animationConfig = { time: 0.5, type: 'linear', background: Background.first };
+const animationConfig = { transitionTime: 0.5, transitionType: 'linear', background: Background.first };
 
 const Page = () => (
   <SlideWrapper>

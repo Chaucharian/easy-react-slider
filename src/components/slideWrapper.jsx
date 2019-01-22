@@ -50,10 +50,10 @@ class SlideWrapper extends Component {
       
       if(this.touchDown && this.currentTime > this.lastTime) {
         this.lastTime = this.currentTime + 500; // set extra time to make a delay
-        if(movementX <= -5) this.movement = 'rigth';
-        if(movementX >= 5) this.movement = 'left';
-        if(movementY <= -5) this.movement = 'down';
-        if(movementY >=  5) this.movement = 'up';
+        if(movementX <= -1) this.movement = 'rigth';
+        if(movementX >= 1) this.movement = 'left';
+        if(movementY <= -1) this.movement = 'down';
+        if(movementY >=  1) this.movement = 'up';
         this.moveSection();
       }
     }
@@ -69,6 +69,7 @@ class SlideWrapper extends Component {
           this.movement = 'rigth';
         }
         this.moveSection();
+        console.log(" section: "+this.currentSection+" child: ",this.currentChildSection);
     }
   
     moveSection() {
@@ -85,6 +86,7 @@ class SlideWrapper extends Component {
       }  else {
         this.moveToChildrenSection();
       }
+      console.log(this.getSectionTransition(this.currentSection));
     }
   
     moveToChildrenSection() {
@@ -107,6 +109,18 @@ class SlideWrapper extends Component {
   
     moveWrapper(x, y) {
       document.getElementById('wrapper').style.transform = `translate(${x}%,${y}%)`;
+    }
+
+    getChildSectionTransition(index, indexChild) {
+      let section;
+      section = this.props.children[index].props.children[indexChild];
+      return section;
+    }
+
+    getSectionTransition(index) {
+      let section;
+      section = this.props.children[index];
+      return section;
     }
   
     hasChildren(index) {
