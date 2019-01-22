@@ -32,7 +32,8 @@ module.exports = exports = {
         "react/no-unknown-property": "error",
         "react/no-unused-prop-types": "warn",
         "react/prop-types": "off",
-        "react/react-in-jsx-scope": "error"
+        "react/react-in-jsx-scope": "error",
+        "react/jsx-indent": "off"
       }
     
 };

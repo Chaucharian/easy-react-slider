@@ -22,7 +22,6 @@ const Page = () => (
     <Section />
     <Section />
     <Section />
-
   </SlideWrapper>
 );
 
