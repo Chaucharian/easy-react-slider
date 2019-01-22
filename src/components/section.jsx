@@ -13,7 +13,6 @@ class Section extends Component {
   }
 
   componentWillMount() {
-  //  console.log(this.newState());
     this.setState(this.newState());
   }
 
@@ -22,17 +21,13 @@ class Section extends Component {
   }
 
   newState() {
-    let newState = { id: sectionId, background: Background.default, transitionType: 'ease', transitionTime: 0.5 };
-
-    if(this.props.configuration !== undefined) {
-      if(this.props.configuration.background !== undefined) {
-        newState.background = this.props.configuration.background;
-      } else if(this.props.configuration.transitionTime !== undefined) {
-        newState.transitionTime = this.props.configuration.transitionTime;
-      } else if(this.props.configuration.animationType !== undefined) {
-        newState.transitionType = this.props.configuration.transtitionType;
-      }
-    }
+    const { background, transitionType, transitionTime, id } = this.props;
+    let newState = { 
+      id: sectionId, 
+      background: background === undefined ? Background.default : background, 
+      transitionType: transitionType === undefined ? 'ease' : transitionType, 
+      transitionTime: transitionTime === undefined ? 0.5 : transitionTime 
+    };
 
     return newState;
   }

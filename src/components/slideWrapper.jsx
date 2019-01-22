@@ -45,8 +45,8 @@ class SlideWrapper extends Component {
     }
 
     identifyMovement(event) {
-      const { movementX, movementY } = event;
-      this.currentTime = event.timeStamp;
+      const { movementX, movementY, timeStamp } = event;
+      this.currentTime = timeStamp;
       
       if(this.touchDown && this.currentTime > this.lastTime) {
         this.lastTime = this.currentTime + 500; // set extra time to make a delay

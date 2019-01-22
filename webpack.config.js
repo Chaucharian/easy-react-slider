@@ -57,6 +57,10 @@ module.exports = {
 				filename: "./index.html"
 			})
 		],
+		devServer: {
+			host: '0.0.0.0',//your ip address
+			port: 8080
+		},
     stats: {
         colors: true
     },
