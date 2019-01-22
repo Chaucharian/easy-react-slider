@@ -5,20 +5,15 @@ import SectionContainer from './components/sectionContainer.jsx';
 import Section from './components/section.jsx';
 import Background from './model/imageSections';
 
-const animationConfig = { time: 0.5, type: 'linear', background: Background.two };
-const animationConfig2 = { time: 0.5, type: 'ease' };
-const animationConfig3 = { time: 0.5, type: 'ease-in-out' };
-const animationConfig4 = { time: 0.5, type: 'ease-in' };
-const animationConfi5 = { time: 0.5, type: 'ease-out' };
-
-let sectioN = () => {
-  return <div><h1>EA!</h1></div>
-}
+const animationConfig = { time: 0.5, type: 'linear', background: Background.first };
 
 const Page = () => (
   <SlideWrapper>
     <SectionContainer>
-      <Section {...animationConfig} />
+      <Section {...animationConfig}>
+      <h1> Algo de texto por aca </h1>
+      <b> y por aca </b>
+      </Section>
       <Section />
       <Section />
       <Section />

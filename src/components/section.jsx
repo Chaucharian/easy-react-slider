@@ -21,7 +21,7 @@ class Section extends Component {
   }
 
   newState() {
-    const { background, transitionType, transitionTime, id } = this.props;
+    const { background, transitionType, transitionTime } = this.props;
     let newState = { 
       id: sectionId, 
       background: background === undefined ? Background.default : background, 
@@ -38,12 +38,15 @@ class Section extends Component {
   }
 
   render() {
-    return ( <div className={ Style.section } id={ sectionId }> Section{sectionId} </div> );
+    const { children } = this.props; 
+    return ( <div className={ Style.section } id={ sectionId }><div className={Style.sectionContainer}> { children } </div></div> );
   }
 }
 
 Section.propTypes = {
-  configuration: PropTypes.object
+  background: PropTypes.string,
+  transitionType: PropTypes.string,
+  transitionTime: PropTypes.number
 }
 
 export default Section;

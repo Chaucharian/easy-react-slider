@@ -58,7 +58,7 @@ module.exports = {
 			})
 		],
 		devServer: {
-			host: '0.0.0.0',//your ip address
+			host: 'localhost',//your ip address
 			port: 8080
 		},
     stats: {
