@@ -24,9 +24,10 @@ const Page = () => (
       <Section />
     </SectionContainer>
     <Section />
-      <Section />
-      <Section />
-      <Section />
+    <Section />
+    <Section />
+    <Section />
+
   </SlideWrapper>
 );
 
