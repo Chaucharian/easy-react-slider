@@ -86,7 +86,7 @@ class SlideWrapper extends Component {
       }  else {
         this.moveToChildrenSection();
       }
-      console.log(this.getSectionTransition(this.currentSection));
+      //console.log(this.getSectionTransition(this.currentSection));
     }
   
     moveToChildrenSection() {
