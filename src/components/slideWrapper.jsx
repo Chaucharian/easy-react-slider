@@ -69,24 +69,26 @@ class SlideWrapper extends Component {
           this.movement = 'rigth';
         }
         this.moveSection();
-        console.log(" section: "+this.currentSection+" child: ",this.currentChildSection);
     }
   
     moveSection() {
+      let transitionData = {};
       if(this.movement === 'up') { // up
         if(this.currentSection === 0 || this.currentChildSection !== 0) return;
         this.currentSection -= 1;
         this.position.y += 100;
-        this.moveWrapper(this.position.x, this.position.y);
+        this.setTransition(this.getSectionTransition());
       } else if(this.movement === 'down') { // down
         if(this.currentSection === this.props.children.length - 1 || this.props.children.length === undefined || this.currentChildSection !== 0) return;
         this.currentSection += 1; 
         this.position.y -= 100;
-        this.moveWrapper(this.position.x, this.position.y);
+        this.setTransition(this.getSectionTransition());
       }  else {
+        this.setTransition(this.getChildSectionTransition());
         this.moveToChildrenSection();
       }
-      //console.log(this.getSectionTransition(this.currentSection));
+
+      this.moveWrapper(this.position.x, this.position.y);
     }
   
     moveToChildrenSection() {
@@ -96,30 +98,64 @@ class SlideWrapper extends Component {
         }
         this.currentChildSection -= 1;
         this.position.x += 100;
-        this.moveWrapper(this.position.x, this.position.y);
       } else if(this.movement === 'rigth' && this.hasChildren(this.currentSection)) { // rigth
         if(this.currentChildSection >= this.getChildrenAmount(this.currentSection) - 1){
           return;
         } 
         this.currentChildSection += 1;
         this.position.x -= 100;
-        this.moveWrapper(this.position.x, this.position.y);
       }
+      this.setState({x: this.position.x});
     }
   
+    setTransition(transitionData) {
+      let { transitionType, transitionTime } = transitionData;
+      let transitionFunction = '';
+      switch(transitionType) {
+        case 'ease':
+          transitionFunction = 'cubic-bezier(0.25, 0.1, 0.25, 1.0)';
+        break;
+        case 'linear':
+          transitionFunction = 'cubic-bezier(0.0, 0.0, 1.0, 1.0)';
+        break;
+        case 'ease-in':
+          transitionFunction = 'cubic-bezier(0.42, 0, 1.0, 1.0)';
+        break;
+        case 'ease-out':
+          transitionFunction = 'cubic-bezier(0, 0, 0.58, 1.0)';
+        break;
+        case 'ease-in-out':
+          transitionFunction = 'cubic-bezier(0.42, 0, 0.58, 1.0)';
+        break;
+        default:
+          transitionFunction = 'cubic-bezier(0.25, 0.1, 0.25, 1.0)';
+          transitionTime = 0.5;
+        break;
+      }
+      document.getElementById('wrapper').style.transition = `transform ${transitionTime}s ${transitionFunction}`;
+    }
+
     moveWrapper(x, y) {
       document.getElementById('wrapper').style.transform = `translate(${x}%,${y}%)`;
     }
 
-    getChildSectionTransition(index, indexChild) {
+    getChildSectionTransition() {
+      let index = this.currentSection;
+      let childIndex = this.currentChildSection;
       let section;
-      section = this.props.children[index].props.children[indexChild];
+      if(this.props.children[index].props.children !== undefined) {
+        section = this.props.children[index].props.children[childIndex].props;
+      }
       return section;
     }
 
-    getSectionTransition(index) {
+    getSectionTransition() {
+      let index = this.currentSection;
       let section;
-      section = this.props.children[index];
+      section = this.props.children[index].props;
+      if(section.children !== undefined) {
+        section = section.children[0].props;
+      } 
       return section;
     }
   
@@ -154,7 +190,7 @@ class SlideWrapper extends Component {
     scrollHandler() { }
   
     render() {
-      const { children } = this.props;
+      const { children, render } = this.props;
       return ( <div className={Style.wrapper} id="wrapper" >{ children } </div> );
     }
   }

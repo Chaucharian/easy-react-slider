@@ -49,4 +49,4 @@ Section.propTypes = {
   transitionTime: PropTypes.number
 }
 
-export default Section;
+export default Section; 
