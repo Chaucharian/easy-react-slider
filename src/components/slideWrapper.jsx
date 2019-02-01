@@ -155,11 +155,17 @@ class SlideWrapper extends Component {
 
     getSectionTransition() {
       let index = this.currentSection;
-      let section;
-      section = this.props.children[index].props;
-      if(section.children !== undefined) {
-        section = section.children[0].props;
-      } 
+      let name;
+      let section = this.props.children[index];
+      name = this.props.children[index].type.name;
+      if (name !== undefined) {
+        if (name === 'Section') {
+          section = section.props; 
+        } else{
+          section = section.props.children.length !== undefined ? section.props.children[0].props : section.props.children.props;  
+        }
+      }
+
       return section;
     }
   
