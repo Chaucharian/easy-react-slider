@@ -18,6 +18,7 @@ Run <b>yarn</b> then run <b>yarn start</b>
                     <p>whatever html you like to include</p>
                 </Section>
             </SectionContainer>
+            <Section />
         </SlideWrapper>
     );
 
@@ -31,9 +32,9 @@ Run <b>yarn</b> then run <b>yarn start</b>
     Only receive Section as children making a slide effect to the right
 
 ## Section
-    This component is where you put your html. Section also receive a configuration object if you want
+    This component is where you put your html. it also receive a configuration object if you want to change its behavior.
 ```js
     const customConfiguration1 = { transitionTime: 0.5, transitionType: 'linear', background: Background.first };
 ```
-    specifying time,type and background to your section
+    You can specify time,type and background to your section
     and that's all... easy right ?
