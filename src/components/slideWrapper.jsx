@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import ErrorBoundary from './errorBoundary.jsx';
 import Style from '../styles.less';
 
 class SlideWrapper extends Component {
@@ -84,7 +84,6 @@ class SlideWrapper extends Component {
         this.position.y -= 100;
         this.setTransition(this.getSectionTransition());
       }  else {
-        this.setTransition(this.getChildSectionTransition());
         this.moveToChildrenSection();
       }
 
@@ -98,17 +97,18 @@ class SlideWrapper extends Component {
         }
         this.currentChildSection -= 1;
         this.position.x += 100;
+        this.setTransition(this.getChildSectionTransition());
       } else if(this.movement === 'rigth' && this.hasChildren(this.currentSection)) { // rigth
         if(this.currentChildSection >= this.getChildrenAmount(this.currentSection) - 1){
           return;
         } 
         this.currentChildSection += 1;
         this.position.x -= 100;
+        this.setTransition(this.getChildSectionTransition());
       }
-      this.setState({x: this.position.x});
     }
   
-    setTransition(transitionData) {
+    setTransition(transitionData = {}) {
       let { transitionType, transitionTime } = transitionData;
       let transitionFunction = '';
       switch(transitionType) {
@@ -143,8 +143,12 @@ class SlideWrapper extends Component {
       let index = this.currentSection;
       let childIndex = this.currentChildSection;
       let section;
-      if(this.props.children[index].props.children !== undefined) {
-        section = this.props.children[index].props.children[childIndex].props;
+      if(this.props.children.length !== undefined) {
+        if(this.props.children[index].props.children !== undefined) {
+          section = this.props.children[index].props.children[childIndex].props;
+        }
+      } else {
+        section = this.props.children.props.children[childIndex].props;
       }
       return section;
     }
@@ -161,13 +165,18 @@ class SlideWrapper extends Component {
   
     hasChildren(index) {
       let hasChildren = false;
-      if(this.props.children !== undefined) {
         if(this.props.children.length !== undefined) {
-          hasChildren = this.props.children[index].props.children !== undefined;
-        } else {
-          hasChildren = this.props.children.props.children !== undefined;
-        }
-      }
+          if (this.props.children[index].type.name === 'SectionContainer') {
+            if (this.props.children[index].props.children.length !== undefined) {
+              hasChildren = true;
+            } else{
+              hasChildren = false;
+            }
+          } else{
+            hasChildren = false;
+          }
+        
+        } 
       return hasChildren;
     }
 
@@ -180,6 +189,8 @@ class SlideWrapper extends Component {
           } else {
             childrenAmount = 1;
           }
+        } else {
+          childrenAmount = this.props.children.props.children.length;
         }
       } else{
         childrenAmount = 0;
@@ -190,8 +201,8 @@ class SlideWrapper extends Component {
     scrollHandler() { }
   
     render() {
-      const { children, render } = this.props;
-      return ( <div className={Style.wrapper} id="wrapper" >{ children } </div> );
+      const { children } = this.props;
+      return ( <div className={Style.wrapper} id="wrapper" ><ErrorBoundary>{ children }</ErrorBoundary></div> );
     }
   }
   

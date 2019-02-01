@@ -37,9 +37,24 @@ class Section extends Component {
     document.getElementById(`${id}`).style.background = `url(${background})`;
   }
 
+  thowError() {
+    throw (new Error('Section only accept html as content'));
+  }
+
   render() {
     const { children } = this.props; 
-    return ( <div className={ Style.section } id={ sectionId }><div className={Style.sectionContainer}> { children } </div></div> );
+    if (children.length !== undefined) {
+      children.map( child => {
+        if (child.type.name !== undefined) {
+          this.thowError();
+        }
+      });
+    } else {
+      if (children.type.name !== undefined) {
+        this.thowError();
+      }
+    }
+    return ( <div className={ Style.section } id={ sectionId }><div className={Style.sectionContainer}>{ children }</div></div> );
   }
 }
 
