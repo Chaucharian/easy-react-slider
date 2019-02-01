@@ -1,1 +1,39 @@
-# Library to make one page scrollable effect easily using React
+<h1>Easy React Slider</h1>
+With this handfull library you can make web sites like a presentation without effort. 
+
+<h2>Installation</h2>
+Run <b>yarn</b> then run <b>yarn start</b>
+
+<h2>Basic Usage</h2>
+```javascript
+    const customConfiguration1 = { transitionTime: 0.5, transitionType: 'linear', background: Background.first };
+    const customConfiguration2 = { transitionTime: 1, transitionType: 'ease', background: Background.first };
+
+    const Page = () => (
+        <SlideWrapper>
+            <SectionContainer>
+                <Section {...customConfiguration1} />
+                <Section {...customConfiguration2}> 
+                    <h1>Skkrr!</h1>
+                    <p>whatever html you like to include</p>
+                </Section>
+            </SectionContainer>
+        </SlideWrapper>
+    );
+
+    ReactDOM.render(<Page />, document.getElementById('root'));
+```
+
+<h3>SlideWrapper<h3>
+    It's the whole page container, it receives SectionContainer or Section as children
+
+<h3>SectionContainer<h3>
+    Only receive Section as children making a slide effect to the right
+
+<h3>Section<h3>
+    This component is where you put your html. Section also receive a configuration object if you want
+```javascript
+    const customConfiguration1 = { transitionTime: 0.5, transitionType: 'linear', background: Background.first };
+```     
+    specifying time,type and background to your section
+    and that's all... easy right ?

@@ -5,23 +5,26 @@ import SectionContainer from './components/sectionContainer.jsx';
 import Section from './components/section.jsx';
 import Background from './model/imageSections';
 
-const animationConfig = { transitionTime: 0.5, transitionType: 'linear', background: Background.first };
-const animationConfig2 = { transitionTime: 1, transitionType: 'ease', background: Background.first };
-const animationConfig3 = { transitionTime: .8, transitionType: 'ease-out', background: Background.first };
-const animationConfig4 = { transitionTime: 1, transitionType: 'ease-in-out', background: Background.first };
+const animationConfig = { transitionTime: 0.5, transitionType: 'linear', background: Background.default };
+const animationConfig2 = { transitionTime: 1, transitionType: 'ease', background: Background.default };
+const animationConfig3 = { transitionTime: 2, transitionType: 'ease', background: Background.default };
 
 const Page = () => (
   <SlideWrapper>
-     <Section/>
-     <Section {...animationConfig3}/>
-     <Section {...animationConfig3}> 
-     <h1>
-       Esa!
-     </h1>
+      <Section {...animationConfig2} >
+      <h1>
+        Esa!
+      </h1> 
+      </Section>
+      <Section {...animationConfig} /> 
+      <Section>
+      <h1>
+        Esa!
+      </h1>
      </Section>
      <SectionContainer>
-      <Section {...animationConfig3}/>
-      <Section {...animationConfig3}> 
+      <Section {...animationConfig3} />
+      <Section {...animationConfig3} > 
       <h1>
         Esa!
       </h1>
