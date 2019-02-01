@@ -4,8 +4,8 @@ With this handfull library you can make web sites like a presentation without ef
 <h2>Installation</h2>
 Run <b>yarn</b> then run <b>yarn start</b>
 
-<h2>Basic Usage</h2>
-```javascript
+## Basic Usage
+```js
     const customConfiguration1 = { transitionTime: 0.5, transitionType: 'linear', background: Background.first };
     const customConfiguration2 = { transitionTime: 1, transitionType: 'ease', background: Background.first };
 
@@ -24,16 +24,16 @@ Run <b>yarn</b> then run <b>yarn start</b>
     ReactDOM.render(<Page />, document.getElementById('root'));
 ```
 
-<h3>SlideWrapper<h3>
+## SlideWrapper
     It's the whole page container, it receives SectionContainer or Section as children
 
-<h3>SectionContainer<h3>
+## SectionContainer
     Only receive Section as children making a slide effect to the right
 
-<h3>Section<h3>
+## Section
     This component is where you put your html. Section also receive a configuration object if you want
-```javascript
+```js
     const customConfiguration1 = { transitionTime: 0.5, transitionType: 'linear', background: Background.first };
-```     
+```
     specifying time,type and background to your section
     and that's all... easy right ?
