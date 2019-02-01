@@ -43,17 +43,20 @@ class Section extends Component {
 
   render() {
     const { children } = this.props; 
-    if (children.length !== undefined) {
-      children.map( child => {
-        if (child.type.name !== undefined) {
+    if (children !== undefined) {
+      if (children.length !== undefined) {
+        children.map( child => {
+          if (child.type.name !== undefined) {
+            this.thowError();
+          }
+        });
+      } else {
+        if (children.type.name !== undefined) {
           this.thowError();
         }
-      });
-    } else {
-      if (children.type.name !== undefined) {
-        this.thowError();
       }
     }
+   
     return ( <div className={ Style.section } id={ sectionId }><div className={Style.sectionContainer}>{ children }</div></div> );
   }
 }

@@ -12,28 +12,21 @@ const animationConfig4 = { transitionTime: 1, transitionType: 'ease-in-out', bac
 
 const Page = () => (
   <SlideWrapper>
-      <Section {...animationConfig3}>
-        <h1> Algo de texto por aca </h1>
-        <b> y por aca </b>
+     <Section/>
+     <Section {...animationConfig3}/>
+     <Section {...animationConfig3}> 
+     <h1>
+       Esa!
+     </h1>
+     </Section>
+     <SectionContainer>
+      <Section {...animationConfig3}/>
+      <Section {...animationConfig3}> 
+      <h1>
+        Esa!
+      </h1>
       </Section>
-      <Section {...animationConfig}>
-        <h1> Algo de texto por aca </h1>
-        <b> y por aca </b>
-      </Section>
-      <Section {...animationConfig2}>
-        <h1> Algo de texto por aca </h1>
-        <b> y por aca </b>
-      </Section>
-      <SectionContainer>
-      <Section {...animationConfig4}>
-        <h1> Algo de texto por aca </h1>
-        <b> y por aca </b>
-      </Section>
-      <Section {...animationConfig3}>
-        <h1> Algo de texto por aca </h1>
-        <b> y por aca </b>
-      </Section>
-      </SectionContainer>
+     </SectionContainer>
   </SlideWrapper>
 );
 

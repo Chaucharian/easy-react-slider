@@ -41,7 +41,7 @@ class SectionContainer extends Component {
         }
       } 
     } else {
-      this.thowError('SectionContainer its only a container, you need to put a Section like child at least');
+      this.thowError("SectionContainer it's a container to wrap Sections up");
     }
     return ( <div className={Style.sectionContainer} id={`section-container-${sectionContainerId}`} >{ children }</div> );
   }
