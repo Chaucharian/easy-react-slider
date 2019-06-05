@@ -26,15 +26,15 @@ Run <b>yarn</b> then run <b>yarn start</b>
 ```
 
 ## SlideWrapper
-    It's the whole page container, it receives SectionContainer or Section as children
+   It's the whole page container, it receives SectionContainer or Section as children
 
 ## SectionContainer
-    Only receive Section as children making a slide effect to the right
+   Only receive Section as children making a slide effect to the right
 
 ## Section
-    This component is where you put your html. it also receive a configuration object if you want to change its behavior.
+   This component is where you put your html. it also receive a configuration object if you want to change its behavior.
 ```js
     const customConfiguration1 = { transitionTime: 0.5, transitionType: 'linear', background: Background.first };
 ```
-    You can specify time,type and background to your section
-    and that's all... easy right ?
+   You can specify time,type and background to your section
+   and that's all... easy right ?
